@@ -50,14 +50,15 @@ router.post('/run', async (req: Request, res: Response) => {
   try {
     const { userId, limit } = req.query;
     if (!userId) {
-      return res.status(400).json({ error: 'MISSING_USER_ID', message: 'userId required' });
+      res.status(400).json({ error: 'MISSING_USER_ID', message: 'userId required' });
+    } else {
+      const analyzed = await agentService.analyzeArticles(userId as string, Number(limit) || 5);
+      res.json({
+        success: true,
+        message: `Analyzed ${analyzed} articles for user ${userId}`,
+        analyzed,
+      });
     }
-    const analyzed = await agentService.analyzeArticles(userId as string, Number(limit) || 5);
-    res.json({
-      success: true,
-      message: `Analyzed ${analyzed} articles for user ${userId}`,
-      analyzed,
-    });
   } catch (error) {
     res.status(500).json({
       error: 'INTERNAL_ERROR',

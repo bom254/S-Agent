@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { z } from 'zod';
 import { newsService } from '../services/news.service.js';
-import type { NewsStatus } from '../services/news.types.js';
 import { Article } from '../models/index.js';
 
 const router = Router();
@@ -56,7 +55,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     
-    const article = await Article.findByPk(id);
+    const article = await Article.findByPk(id as string);
 
     if (!article) {
       res.status(404).json({
@@ -155,20 +154,19 @@ router.post('/start', async (req: Request, res: Response) => {
 
     const parsed = schema.safeParse(req.body);
     if (!parsed.success) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: 'VALIDATION_ERROR',
         details: parsed.error.errors,
       });
+    } else {
+      await newsService.startPeriodicFetch(parsed.data.intervalMs);
+      res.json({
+        success: true,
+        message: 'Periodic news fetching started',
+        status: newsService.status(),
+      });
     }
-
-    await newsService.startPeriodicFetch(parsed.data.intervalMs);
-    
-    res.json({
-      success: true,
-      message: 'Periodic news fetching started',
-      status: newsService.status(),
-    });
   } catch (error) {
     console.error('Start fetch error:', error);
     res.status(500).json({

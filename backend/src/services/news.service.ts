@@ -85,20 +85,7 @@ class NewsService {
     this.lastFetch = new Date().toISOString();
 
     for (const art of articles) {
-      const data = {
-        source: art.source,
-        title: art.title,
-        url: art.url,
-        publishedAt: new Date(art.published_at),
-        content: art.content || null,
-        metadata: {
-          cryptopanic_id: art.id,
-          fetched_at: this.lastFetch,
-        },
-      };
-
-      // DB upsert stub - models import issue
-      console.log(`[News] Would upsert article ${art.url}`);
+      console.log(`[News] Would upsert article: ${art.title.slice(0, 50)}...`);
 
     }
 

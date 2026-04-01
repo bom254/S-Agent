@@ -59,7 +59,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const insight = await Insight.findByPk(id, {
+    const insight = await Insight.findByPk(id as string, {
       include: [
         { model: Article, as: 'article' },
         { model: Feedback, as: 'feedback', include: [{ model: User, as: 'user', attributes: ['id', 'name'] }] },
