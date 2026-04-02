@@ -20,8 +20,7 @@ app.use(helmet({
 }));
 
 const allowedOrigins = isProduction 
-  ? [process.env.FRONTEND_URL || ''].filter(Boolean)
-  : [`process.env.FRONTEND_URL`];
+  ? [process.env.FRONTEND_URL].filter(Boolean): [''];
 
 app.use(cors({
   origin: allowedOrigins,

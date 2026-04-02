@@ -17,8 +17,15 @@ Insight.hasMany(Feedback, { foreignKey: 'insightId', as: 'feedback', onDelete: '
 Feedback.belongsTo(Insight, { foreignKey: 'insightId', as: 'insight' });
 
 async function initDatabase() {
-  await sequelize.authenticate();
-  await sequelize.sync({ alter: true });
+  try {
+    await sequelize.authenticate();
+    console.log('✅ Sequelize DB connected successfully');
+    await sequelize.sync({ alter: true });
+    console.log('✅ Models synced');
+  } catch (error) {
+    console.error('❌ DB connection/sync failed:', error);
+    throw error; // Still throw to prevent start without DB
+  }
 }
 
 export { User, Article, Insight, Feedback, sequelize, initDatabase };

@@ -1,20 +1,20 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import Process from './components/Process';
 import Stats from './components/Stats';
-import AuthModal from './components/AuthModal';
 
 function lerp(start: number, end: number, factor: number): number {
   return start + (end - start) * factor;
 }
 
 export default function Home() {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const router = useRouter();
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef(null);
   
@@ -76,7 +76,7 @@ export default function Home() {
             transition: "transform 0.1s ease-out",
           }}
         >
-          <div className="w-full h-full bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-2xl backdrop-blur-sm border border-white/10 animate-pulse" />
+          <div className="w-full h-full bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 rounded-2xl backdrop-blur-sm border border-white/10" />
         </div>
       </div>
 
@@ -89,17 +89,12 @@ export default function Home() {
 
       <div className="fixed top-6 right-6 z-50">
         <button
-          onClick={() => setIsAuthModalOpen(true)}
+          onClick={() => router.push('/dashboard')}
           className="px-4 py-2 text-xs font-mono uppercase tracking-wider text-black bg-white rounded-full hover:bg-white/90 transition-all"
         >
-          Register / Login
+          Get Agents
         </button>
       </div>
-
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-      />
     </main>
   );
 }

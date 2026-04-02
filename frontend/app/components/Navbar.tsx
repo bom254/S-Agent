@@ -59,14 +59,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden md:block">
-            <a
-              href="#register"
-              className="inline-flex items-center justify-center px-5 py-2 text-xs font-[family-name:var(--font-mono)] uppercase tracking-wider text-white bg-white/10 hover:bg-white/20 rounded-full transition-all"
-            >
-              Get Started
-            </a>
-          </div>
+
 
           <button
             className="md:hidden text-white p-2"
@@ -94,13 +87,6 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <a
-                href="#register"
-                className="inline-flex items-center justify-center px-5 py-2 text-xs font-[family-name:var(--font-mono)] uppercase tracking-wider text-white bg-white/10 rounded-full transition-all mt-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Get Started
-              </a>
             </div>
           </motion.div>
         )}
