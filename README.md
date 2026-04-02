@@ -13,37 +13,6 @@ A production-ready autonomous agent for DeFi research and analysis, powered by Q
 - **Agent Orchestration**: Stateful agent with start/stop/run operations
 - **Insight Generation**: AI-generated summaries with key points and tags
 
-## 🏆 Judging Criteria Alignment
-
-### Technical Implementation 💻 (25%)
-- Clean TypeScript codebase with strict mode
-- Service-based architecture (no fat controllers)
-- Input validation with Zod
-- Proper error handling throughout
-- Sequelize ORM for database operations
-
-### Nosana Integration ⚡ (25%)
-- Qwen3.5-27B-AWQ-4bit model integration
-- Decentralized AI inference
-- Efficient resource usage
-- API key configuration in `.env`
-
-### Usefulness & UX 🎯 (25%)
-- Practical DeFi research tool
-- User-friendly dashboard with dark theme
-- Login-protected access
-- Easy-to-use agent controls
-
-### Creativity & Originality 🎨 (15%)
-- Novel approach to automated DeFi research
-- Sentiment analysis for crypto news
-- Key point extraction and tagging
-
-### Documentation 📝 (10%)
-- Comprehensive README
-- Environment variable configuration
-- API endpoint documentation
-- Setup instructions
 
 ## 🚀 Quick Start
 
